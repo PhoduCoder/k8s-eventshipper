@@ -1,0 +1,23 @@
+
+# Default values for k8s-event-logger.
+
+# Docker image configuration
+image:
+  repository: your_image_here
+  tag: latest
+
+# Sink type ("Stdout" or "S3")
+sinkType: "Stdout"
+
+# Redis configuration
+redis:
+  host: "redis"
+  port: 6379
+
+# Polling frequency in seconds
+pollingFrequency: 300
+
+# AWS configuration (required if sinkType is "S3")
+aws:
+  region: "your_aws_region_here"
+  s3Bucket: "your_s3_bucket_here"

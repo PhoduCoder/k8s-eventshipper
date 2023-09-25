@@ -1,0 +1,29 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-event-logger
+spec:
+      serviceAccountName: k8s-event-logger-sa
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-event-logger
+  template:
+    metadata:
+      labels:
+        app: k8s-event-logger
+    spec:
+      serviceAccountName: k8s-event-logger-sa
+      containers:
+      - name: k8s-event-logger
+        image: your_image_here
+        env:
+        - name: SINK_TYPE
+          value: "Stdout"  # Change to "S3" for S3 sink
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: POLLING_FREQUENCY
+          value: "300"

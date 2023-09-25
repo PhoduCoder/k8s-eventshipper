@@ -1,0 +1,22 @@
+
+{
+  "mappings": {
+    "properties": {
+      "metadata": {
+        "properties": {
+          "name": {
+            "type": "keyword"
+          },
+          "namespace": {
+            "type": "keyword"
+          },
+          "creationTimestamp": {
+            "type": "date"
+          },
+          // ... other metadata fields
+        }
+      },
+      // ... other event fields
+    }
+  }
+}

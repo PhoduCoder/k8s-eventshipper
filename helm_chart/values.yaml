@@ -1,0 +1,5 @@
+
+# Default values for k8s-event-logger.
+image:
+  repository: your_image_here
+  tag: latest

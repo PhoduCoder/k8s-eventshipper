@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-k8s-event-logger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-k8s-event-logger
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-k8s-event-logger
+    spec:
+      serviceAccountName: k8s-event-logger-sa
+      containers:
+      - name: k8s-event-logger
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+        - name: SINK_TYPE
+          value: "{{ .Values.sinkType }}"
+        - name: REDIS_HOST
+          value: "{{ .Values.redis.host }}"
+        - name: REDIS_PORT
+          value: "{{ .Values.redis.port | toString }}"
+        - name: POLLING_FREQUENCY
+          value: "{{ .Values.pollingFrequency | toString }}"
+        - name: AWS_REGION
+          value: "{{ .Values.aws.region }}"
+        - name: S3_BUCKET
+          value: "{{ .Values.aws.s3Bucket }}"
